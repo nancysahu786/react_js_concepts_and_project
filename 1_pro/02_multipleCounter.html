@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <!-- algorithm to efficiently manipulate your UI -->
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+
+    <!-- React DOM  -> uses react to update the DOM-->
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+
+    <!-- transpiler -> JSX -> into javascript -->
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+   
+    <style>
+        .counter{
+            margin-top: 2rem;
+            border-bottom: 2px solid gray;
+            padding-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="root"></div>
+
+    <script type="text/babel">
+        
+        function Counter(props) {
+
+            const {counterNumber, initialValue} = props;
+            const [count, setCount] = React.useState(initialValue);
+
+        const increment = () => {
+            setCount(count + 1);
+        }
+
+        const decrement = () => {
+            setCount(count - 1);
+        }
+            return (
+              
+                <div className="counter">
+                    <h1>Counter Number: {counterNumber}</h1>
+                    <button onClick={increment}>+</button>
+                    <p>{count}</p>
+                    <button onClick={decrement}>-</button>
+                </div>
+              );
+        }
+
+        function CounterParent(){
+         return(
+         <div>
+            <Counter counterNumber={1} initialValue={2}/>
+            <Counter counterNumber={2} initialValue={5}/>
+
+            <Counter counterNumber={3} initialValue={8}/>
+            
+
+
+         </div>
+        );
+        }
+
+     const root =   ReactDOM.createRoot(document.getElementById('root'));
+root.render(<CounterParent />)
+    </script>
+
+
+</body>
+
+</html>
+
+
+
+
+

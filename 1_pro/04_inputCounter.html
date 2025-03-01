@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <!-- algorithm to efficiently manipulate your UI -->
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+
+    <!-- React DOM  -> uses react to update the DOM-->
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+
+    <!-- transpiler -> JSX -> into javascript -->
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+</head>
+
+<body>
+
+    <div id="root"></div>
+
+    <script type="text/babel">
+        
+        function Counter() {
+            const [count, setCount] = React.useState(0);
+            const [number,setNumber] = React.useState(0);
+        const increment = () => {
+            console.log("increment call");
+
+            setNumber(number + 1);
+            console.log("count", count);
+        
+        }
+
+        const decrement = () => {
+
+            setNumber(number - 1);
+            
+        }
+
+        
+
+const handleChange = (e) => {
+    console.log("onchange call");
+    const num = e.target.value
+    setNumber(+num);
+}
+            return (
+                <div>
+                    <div>
+                        <label>Message</label>
+                    <input 
+                    type="number"
+                    name="number"
+                    id="number"
+                    placeholder="enter number"
+                    value = {number}
+                    onChange={handleChange}
+                    />
+
+                        </div>
+                    <button onClick={increment}>+</button>
+                    <p>{number}</p>
+                    <button onClick={decrement}>-</button>
+                </div>
+            )
+        }
+
+        ReactDOM.render(<Counter></Counter>, document.getElementById("root"));
+
+    </script>
+
+
+</body>
+
+</html>
