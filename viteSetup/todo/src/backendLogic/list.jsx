@@ -5,11 +5,11 @@ function List(props) {
       <div className='list'>
         <ul>
           {
-            props.taskArr.map((task) => {
-              return <>
-                <li>{task}</li>
-              </>
-            })
+            props.taskArr.map((task,index) => (
+             
+                <li key={index}>{task}</li>
+            
+            ))
           }
         </ul>
 
