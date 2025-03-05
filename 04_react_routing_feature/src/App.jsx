@@ -7,7 +7,7 @@ import Home from './components/Home'
 import Product from './components/Product'
 import ProductDetails from './components/ProductDetails'
 import PageNotFound from './components/PageNotFound'
-
+import './App.css'
 
 function App() {
   const [count, setCount] = useState(0)
