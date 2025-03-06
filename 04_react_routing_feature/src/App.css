@@ -44,6 +44,10 @@
 .nav_wrapper{
   background-color: black;
   height: 7rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
 }
 
 .search_input{
