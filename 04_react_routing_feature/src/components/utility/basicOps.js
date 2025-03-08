@@ -1,36 +1,66 @@
 import React from 'react'
 
-export default  function basicOps(product,searchValue,sortDir) {
+const categorization = (arrOfProducts,currCategory) => {
+  let modifiedArr = arrOfProducts;
+  if(currCategory != "All Categories"){
+    modifiedArr = modifiedArr.filter((product)=>{
+      return product.category == currCategory;
+    })
+  }
+    return modifiedArr;
+  
+}
+
+const sorting = (arrOfProducts,sortDir) => {
+  let modifiedArr = arrOfProducts;
+  if(sortDir != 0){
+    if(sortDir == 1){
+      modifiedArr = modifiedArr.sort(incCorporator);
+      // increasing order
+    }else{
+      // decreasing order
+      modifiedArr = modifiedArr.sort(decCorporator)
+
+    }
+  }
+    return modifiedArr;
+}
+
+const searchItems = (arrOfProducts,searchValue) =>{
+  let modifiedArr = arrOfProducts;
+
+  if (searchValue != "") {
+    modifiedArr = modifiedArr.filter((product) => {
+      let lowerSearchItem = searchValue.toLocaleLowerCase();
+      let lowerProductItem = product.title.toLocaleLowerCase();
+      return lowerProductItem.includes(lowerSearchItem);
+    })
+  }
+  return modifiedArr;
+}
+
+export default  function basicOps(product,searchValue,sortDir,currCategory) {
+  let modifiedArr = product;
 
   if(product === null){
     return;
   }
 
   // filtering and hiding products
-  let filterArr = product;
 
-  if (searchValue != "") {
-    filterArr = filterArr.filter((product) => {
-      let lowerSearchItem = searchValue.toLocaleLowerCase();
-      let lowerProductItem = product.title.toLocaleLowerCase();
-      return lowerProductItem.includes(lowerSearchItem);
-    })
-  }
+  modifiedArr = searchItems(modifiedArr,searchValue);
 
   // sorting and rearrange 
-  let filterSortedArray = filterArr;
-  if(sortDir != 0){
-    if(sortDir == 1){
-      filterSortedArray = filterSortedArray.sort(incCorporator);
-      // increasing order
-    }else{
-      // decreasing order
-      filterSortedArray = filterSortedArray.sort(decCorporator)
+   modifiedArr = sorting(modifiedArr,sortDir);
+ 
 
-    }
-  }
+  // categorization
+  
+  modifiedArr = categorization(modifiedArr,currCategory);
+ 
+ 
 
-  return filterSortedArray;
+  return modifiedArr;
 }
 
 function incCorporator (product1,product2){

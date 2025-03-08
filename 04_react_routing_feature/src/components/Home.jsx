@@ -3,12 +3,14 @@ import ArrowCircleUpIcon from '@mui/icons-material/ArrowCircleUp';
 import ArrowCircleDownIcon from '@mui/icons-material/ArrowCircleDown';
 import basicOps from './utility/basicOps';
 import Categories from './Categories';
+import ProductList from './ProductList';
 
 function Home() {
   const [searchValue, setSearchValue] = useState("");
   const [product, setProduct] = useState(null);
 const [sortDir,setSortDir] = useState(0);
 const [categories, setCategories] = useState([]);
+const [currCategory,setCrrCategory] = useState(["All Categories"]);
 
 // get all the products
   useEffect(() => {
@@ -25,17 +27,9 @@ const [categories, setCategories] = useState([]);
     })()
   }, []);
 
-  // let filterArr = product;
 
-  // if (searchValue != "") {
-  //   filterArr = filterArr.filter((product) => {
-  //     let lowerSearchItem = searchValue.toLocaleLowerCase();
-  //     let lowerProductItem = product.title.toLocaleLowerCase();
-  //     return lowerProductItem.includes(lowerSearchItem);
-  //   })
-  // }
 
- let  modifiedArr = basicOps(product,searchValue,sortDir);
+ let  modifiedArr = basicOps(product,searchValue,sortDir,currCategory);
 
 //  get all the categories
 useEffect(() => {
@@ -67,30 +61,15 @@ useEffect(() => {
        
 
        <div className="categories_wrapper">
-        <Categories categories={categories}/>
+        <Categories categories={categories} setCrrCategory={setCrrCategory}/>
        </div>
       </header>
 
       <main>
-        {
-          modifiedArr === null ? <><div>...loading</div></> :
-            <>
-              {
-                modifiedArr?.map((product) => {
-                  return (
-                    <div className='product'>
-                      <img src={product.image} alt="" className='product_image' style={{ width: '100px' }} />
-                      <div className='product_data'>
-                        <p className='product_title'>{product.title}</p>
-                        <p>{product.price}</p>
-                      </div>
-                    </div>
-                  )
-                })
-              }
-
-            </>
-        }
+          
+              <ProductList modifiedArr={modifiedArr}/>
+            
+        
       </main>
     </div>
   )
